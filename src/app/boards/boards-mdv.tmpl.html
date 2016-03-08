@@ -6,6 +6,10 @@
       -->
     <div
       class="simple-board">
+      <div ng-repeat="board in ctrl.boards">
+        <div class="board-header">{{board.title}}</div>
+        <div class="board-details">{{board.description}}</div>
+      </div>
     </div>
 
   </div>
