@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('noterious')
-  .controller('BoardsCtrl', function (currentUser, BoardsModel) {
+  .controller('BoardsCtrl', function (currentUser , BoardsModel) {
     var ctrl = this;
 
     ctrl.loading = false;
@@ -11,40 +11,43 @@ angular.module('noterious')
       description: '',
       isPublic: false
     };
+    
+    ctrl.boards = [];
 
     ctrl.resetForm = function () {
       ctrl.loading = false;
       ctrl.newBoard = {
         title: '',
         description: '',
-        isPublic: false
+        isPublic: true
       };
     };
 
     ctrl.getBoards = function () {
-      ctrl.boards = {
-        1: {
+      ctrl.boards = [
+        {
           description: "Anything and everything!",
           isPublic: true,
           title: "Random Ideas"
         },
-        2: {
+        {
           description: "BizDev Ideas",
           isPublic: false,
           title: "Hustle"
         },
-        3: {
+        {
           description: "this is a test",
           isPublic: false,
           title: "testing"
         }
-      };
+      ];
     };
 
     ctrl.createBoard = function (board, isValid) {
+      console.log(ctrl.boards);
       if (isValid) {
         ctrl.loading = true;
-        // CREATE BOARD
+        ctrl.boards.push(angular.copy(board));
         ctrl.resetForm();
       }
     };

@@ -1,19 +1,18 @@
 <div class="col-sm-4">
   <div class="boards">
-      <!-- HINT: Don't forget to hook up your ng-repeat element
-      to ctrl.setEditedBoard via ng-click – that way, you will
-      be able to actually see the editing form when you click on a board.
-      -->
-
-    <div class="simple-board"ng-repeat="board in ctrl.boards">
-      <h3 class="board-header">{{board.title}}</h3>
-      <p class="board-details">{{board.description}}</p>
+    <div 
+      class="simple-board"
+      ng-repeat="(id, board) in ctrl.boards"
+      ng-click="ctrl.setEditBoard(id, board)"
+    >
+      <h3>{{board.title}}</h3>
+      <p>{{board.description}}</p>
+      <button class="btn btn-info btn-small">Notes</button>
     </div>
 
   </div>
 </div>
 <div class="col-sm-8">
-  <!-- CREATING -->
   <div ng-if="!ctrl.isEditing" class="col-xs-12 board-details">
     <h3>Create a New Board</h3>
     <hr/>
@@ -21,8 +20,28 @@
       name="ctrl.createForm"
       class="create-form"
       role="form"
+      ng-submit="ctrl.createBoard(ctrl.newBoard, ctrl.createForm.$valid)"
       novalidate>
-      <input type="text" ng-model>
+      <div class="form-group">
+        <label for="boardTitle">Board Title</label>
+        <input 
+          class="form-control" 
+          id="boardTitle" 
+          type="text" 
+          ng-model="ctrl.newBoard.title"
+          placeholder="Board Title"
+        >
+      </div>
+      <div class="form-group">
+        <label for="boardDescription">Board Description</label>
+        <input 
+          class="form-control" 
+          id="boardDescription" 
+          ng-model="ctrl.newBoard.description" 
+          placeholder="Board Description"
+        >
+      </div>
+      <button type="submit" class="btn btn-lg btn-info">Create</button>
     </form>
   </div>
   <!-- EDITING -->
