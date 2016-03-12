@@ -44,7 +44,6 @@ angular.module('noterious')
     };
 
     ctrl.createBoard = function (board, isValid) {
-      console.log(ctrl.boards);
       if (isValid) {
         ctrl.loading = true;
         ctrl.boards.push(angular.copy(board));
@@ -62,7 +61,7 @@ angular.module('noterious')
 
     ctrl.deleteBoard = function (boardId) {
       ctrl.loading = true;
-      // DELETE BOARD
+      ctrl.boards.splice(boardId, 1);
       ctrl.cancelEditing();
     };
 

@@ -5,6 +5,9 @@
       ng-repeat="(id, board) in ctrl.boards"
       ng-click="ctrl.setEditedBoard(id, board)"
     >
+      <button class="btn btn-default pull-right" aria-label="Remove Board" ng-click="ctrl.deleteBoard(id);">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </button>
       <h3>{{board.title}}</h3>
       <p>{{board.description}}</p>
       <button class="btn btn-info btn-small">Notes</button>
@@ -52,7 +55,7 @@
       name="ctrl.updateForm"
       class="edit-form"
       role="form"
-      ng-sugmit="ctrl.updateBoard(ctrl.editedBoardId, ctrl.editedBoard, ctrl.updateForm.$valid)"
+      ng-submit="ctrl.updateBoard(ctrl.editedBoardId, ctrl.editedBoard, ctrl.updateForm.$valid)"
       novalidate
     >
       <div class="form-group">
