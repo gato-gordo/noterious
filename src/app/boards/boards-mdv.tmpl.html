@@ -1,9 +1,9 @@
 <div class="col-sm-4">
   <div class="boards">
     <div 
-      class="simple-board"
+      class="simple-board" ng-class="{active: ctrl.isCurrentBoard(id) }"
       ng-repeat="(id, board) in ctrl.boards"
-      ng-click="ctrl.setEditBoard(id, board)"
+      ng-click="ctrl.setEditedBoard(id, board)"
     >
       <h3>{{board.title}}</h3>
       <p>{{board.description}}</p>
@@ -52,7 +52,28 @@
       name="ctrl.updateForm"
       class="edit-form"
       role="form"
-      novalidate>
+      ng-sugmit="ctrl.updateBoard(ctrl.editedBoardId, ctrl.editedBoard, ctrl.updateForm.$valid)"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="boardTitle">Board Title</label>
+        <input 
+          class="form-control" 
+          id="boardTitle" 
+          type="text" 
+          ng-model="ctrl.editedBoard.title"
+        >
+      </div>
+      <div class="form-group">
+        <label for="boardDescription">Board Description</label>
+        <input 
+          class="form-control" 
+          id="boardDescription"
+          ng-model="ctrl.editedBoard.description"  
+        >
+      </div>
+    <button type="submit" class="btn btn-lg btn-info">Save</button>
+    <button class="btn btn-lg btn-default pull-right" ng-click="ctrl.cancelEditing()">Cancel</button>
     </form>
   </div>
 </div>

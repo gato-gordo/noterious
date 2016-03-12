@@ -55,7 +55,7 @@ angular.module('noterious')
     ctrl.updateBoard = function (boardId, board, isValid) {
       if (isValid) {
         ctrl.loading = true;
-        // UPDATE BOARD
+        ctrl.boards[boardId] = angular.copy(board);
         ctrl.cancelEditing();
       }
     };
